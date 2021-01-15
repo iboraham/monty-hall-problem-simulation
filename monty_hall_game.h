@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include "get_non_prize_door.h"
 #include "switch_function.h"
+#include <time.h>
 
 extern int get_non_prize_door(int host, int num_doors, int player_choice);
 extern int switch_function(int shown_door, int num_doors, int player_choice);
+int rand();
 
 int *monty_hall_game(int _switch, int num_tests)
 {
@@ -14,13 +16,17 @@ int *monty_hall_game(int _switch, int num_tests)
   int lose_switch_cnt = 0;
   int lose_no_switch_cnt = 0;
 
-  for (int i = 1; i < num_tests; i++)
+  time_t t;
+  srand((unsigned)time(&t));
+
+  for (int i = 1; i <= num_tests; i++)
   {
     int door_with_prize = rand() % num_doors;
     int host = door_with_prize;
     int player_choice = rand() % num_doors;
 
     int shown_door = get_non_prize_door(host, num_doors, player_choice);
+
     if (_switch == 1)
     {
       player_choice = switch_function(shown_door, num_doors, player_choice);
