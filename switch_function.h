@@ -1,13 +1,12 @@
 #include <stdio.h>
-
-int rand();
+#include <stdlib.h>
 
 int switch_function(int shown_door, int num_doors, int player_choice)
 {
-  int i = 0;
-  while (i == shown_door || i == player_choice)
+  int i = 1;
+  while (shown_door == i || i == player_choice)
   {
-    i = rand() % num_doors;
+    i = (i + 1) % num_doors;
   }
   return i;
 }
